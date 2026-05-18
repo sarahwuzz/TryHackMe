@@ -1,0 +1,35 @@
+for the first time i always used nmap to scanning the port
+  ```nmap -Pn -sC -sV -oA initial_scan 10.49.177.58
+
+Starting Nmap 7.98 ( https://nmap.org ) at 2026-05-03 09:36 -0400
+Nmap scan report for 10.49.177.58
+Host is up (0.17s latency).
+Not shown: 994 closed tcp ports (reset)
+PORT     STATE SERVICE     VERSION
+21/tcp   open  ftp         vsftpd 3.0.5
+22/tcp   open  ssh         OpenSSH 8.2p1 Ubuntu 4ubuntu0.13 (Ubuntu Linux; protocol 2.0)
+| ssh-hostkey: 
+|   3072 4f:3c:3b:e7:eb:a4:65:f0:47:5e:00:dd:39:40:4b:96 (RSA)
+|   256 69:b7:bd:b9:ca:b3:d9:4f:35:27:65:50:08:7d:8d:3b (ECDSA)
+|_  256 33:ce:1c:0d:db:21:7d:2b:02:b9:23:77:ed:80:6e:c9 (ED25519)
+139/tcp  open  netbios-ssn Samba smbd 4
+445/tcp  open  netbios-ssn Samba smbd 4
+3128/tcp open  http-proxy  Squid http proxy 4.10
+|_http-title: ERROR: The requested URL could not be retrieved
+|_http-server-header: squid/4.10
+3333/tcp open  http        Apache httpd 2.4.41 ((Ubuntu))
+|_http-server-header: Apache/2.4.41 (Ubuntu)
+|_http-title: Vuln University
+Service Info: OSs: Unix, Linux; CPE: cpe:/o:linux:linux_kernel
+
+Host script results:
+|_nbstat: NetBIOS name: IP-10-49-177-58, NetBIOS user: <unknown>, NetBIOS MAC: <unknown> (unknown)
+| smb2-security-mode: 
+|   3.1.1: 
+|_    Message signing enabled but not required
+| smb2-time: 
+|   date: 2026-05-03T13:37:07
+|_  start_date: N/A
+
+Service detection performed. Please report any incorrect results at https://nmap.org/submit/ .
+                    Nmap done: 1 IP address (1 host up) scanned in 35.62 second```
