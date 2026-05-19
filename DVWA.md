@@ -1,8 +1,10 @@
 first time i always used nmap to scanning the port
 
-```bash
-nmap -sV -sC -Pn 10.49.180.226
+ip target : `10.49.180.226`
 
+i used this command : `nmap -sV -sC -Pn 10.49.180.226`
+
+```bash
 Nmap scan report for 10.49.180.226
 Host is up (0.21s latency).
 Not shown: 998 closed tcp ports (reset)
