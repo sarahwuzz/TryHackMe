@@ -50,4 +50,14 @@ After triggering the uploaded `.phtml` payload via the browser, the Netcat liste
 
 To verify the active session and current working directory, standard system enumeration commands (`whoami`, `id`, `hostname`, and `pwd`) were executed.
 
+<img width="1010" height="206" alt="Pasted image 20260503105034" src="https://github.com/user-attachments/assets/2c6d03ec-a6f9-444d-bc9f-9aceb1ad65a4" />
 
+### Remediation & Mitigation :
+
+To mitigate the Unrestricted File Upload vulnerability and prevent Remote Code Execution (RCE), the following security controls must be implemented:
+
+ - Implement Whitelist-Based Extension Filtering: Replace the weak extension blacklist with a strict whitelist. Only permit safe,              explicitly defined file types (e.g., `.jpg`, `.jpeg`, `.png`) and reject all other extensions by default.
+
+ - File Content Validation (MIME-Type & Magic Numbers): Do not rely solely on the file extension. Validate the actual file content using       Magic Numbers (File Signatures) and MIME-type checks to ensure the file matches its declared extension.
+
+ - Disable Script Execution in Upload Directories: Configure the Apache web server (via `.htaccess` or main configuration files) to            explicitly disable script execution (PHP handler) within the `/internal/uploads/` directory.
