@@ -4,7 +4,16 @@
 
 - OWASP Top 10 Risk : A07:2021-Identification and Authentication Failures
 
-- Severity : High
+- CWE : CWE-307: Improper Restriction of Excessive Authentication Attempts
+
+- CVSS : I have two opinions:
+   - CVSS:3.0/AV:N/AC:L/PR:N/UI:N/S:U/C:H/I:H/A:N
+   - CVSS:3.0/AV:N/AC:L/PR:N/UI:N/S:U/C:L/I:L/A:N
+  
+  *This difference arises because I consider DVWA to be a platform specifically designed for training purposes, so I’ve set the confidentiality and integrity levels to “low.”
+However, if this vulnerability (broken authentication) were to occur in the real world, it could be rated “high” or even “critical.”*
+
+- Severity : High / Medium
 
 - Target URL : http://10.49.180.226/login.php
 
@@ -52,5 +61,17 @@ To secure the authentication interface against brute-force attacks, the followin
 1. Implement Account Lockout Policy: Temporarily lock accounts (e.g., for 15 minutes) after 5 consecutive failed login attempts.
 2. Implement Rate Limiting: Limit the number of login requests a single IP address can make within a specific timeframe.
 3. Integrate CAPTCHA: Introduce an anti-automation mechanism like reCAPTCHA on the login page to block automated tools like Burp Suite.
+
+### Additional Findings :
+
+- Low Software Version Disclosure (Apache & OpenSSH)
+
+  - OWASP Top 10 Risk : A05:2021-Security Misconfiguration.
+ 
+  - Description : The target server explicitly discloses the exact versions of running services in the HTTP headers and          SSH banners (Apache/2.4.7 and OpenSSH/6.6.1p1). This architecture mapping allows attackers to easily identify known           public vulnerabilities (CVEs) associated with these specific legacy versions.
+ 
+  - Remediation:
+    - For Apache: set `ServerTokens ProductOnly` and `ServerSignature Off` to hide the version details.
+    - For SSH: Update the SSH configuration to obscure the banner or regularly patch the service to the latest stable release.
 
 Thank You!
