@@ -52,3 +52,5 @@ To secure the authentication interface against brute-force attacks, the followin
 1. Implement Account Lockout Policy: Temporarily lock accounts (e.g., for 15 minutes) after 5 consecutive failed login attempts.
 2. Implement Rate Limiting: Limit the number of login requests a single IP address can make within a specific timeframe.
 3. Integrate CAPTCHA: Introduce an anti-automation mechanism like reCAPTCHA on the login page to block automated tools like Burp Suite.
+
+Thank You!
