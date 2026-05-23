@@ -39,7 +39,7 @@ The primary authentication interface lacks protection against automated credenti
 
 - Payload Type : Simple List Custom password [wordlist Passwords](https://github.com/danielmiessler/SecLists/blob/master/Passwords/Common-Credentials/100k-most-used-passwords-NCSC.txt)
 
-### Exploitation Evidence (Proof Of Concept) :
+### Exploitation Evidence (Proof Of Concept)
 
 The brute-force attack successfully bypassed the Anti-CSRF protection. By configuring Burp Suite to always follow redirections, the successful login attempt was clearly identified by a successful HTTP Status Code (200 OK) and a unique response length.
 
@@ -55,14 +55,14 @@ the last step is to enter the username and password that we already know.
 
 *if there is an invalid CSRF token or the like, just refer to the login page*
 
-### Remediation & Mitigation :
+### Remediation & Mitigation
 
 To secure the authentication interface against brute-force attacks, the following mitigations should be implemented:
 1. Implement Account Lockout Policy: Temporarily lock accounts (e.g., for 15 minutes) after 5 consecutive failed login attempts.
 2. Implement Rate Limiting: Limit the number of login requests a single IP address can make within a specific timeframe.
 3. Integrate CAPTCHA: Introduce an anti-automation mechanism like reCAPTCHA on the login page to block automated tools like Burp Suite.
 
-### Additional Findings :
+### Additional Findings
 
 - Low Software Version Disclosure (Apache & OpenSSH)
 
