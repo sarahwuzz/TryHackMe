@@ -50,7 +50,7 @@ After triggering the uploaded `.phtml` payload via the browser, the Netcat liste
 
 To verify the active session and current working directory, standard system enumeration commands (`whoami`, `id`, `hostname`, and `pwd`) were executed.
 
-<img width="1010" height="206" alt="Pasted image 20260503105034" src="https://github.com/user-attachments/assets/2c6d03ec-a6f9-444d-bc9f-9aceb1ad65a4" />
+<img width="1017" height="198" alt="Pasted image 20260523001417" src="https://github.com/user-attachments/assets/1863a67c-f562-456c-870b-4f7fb4d5eb65" />
 
 ### Remediation & Mitigation
 
@@ -127,12 +127,16 @@ Under standard security practices, administrative tools like `systemctl` should 
   systemctl enable --now /tmp/ddok.service
   ```
 
-Once executed, the service forces the system to assign the SUID bit to `/bin/bash`, allowing the attacker to spawn a root shell by executing `bash -p`
+Once executed, the service forces the system to assign the SUID bit to `/bin/bash`, allowing the attacker to spawn a root shell by executing `/bin/bash -p`
 
 ### Exploitation Evidence (Proof Of Concept)
 
 To verify that full administrative control had been achieved, standard identity check commands (`whoami` and `id`) were run, confirming a successful transition from `www-data` to `root`.
 
+<img width="791" height="217" alt="Pasted image 20260523001612" src="https://github.com/user-attachments/assets/5221920c-5c12-4730-a367-cb25d9a95314" />
 
+### Remediation & Mitigation
 
+- Remove Unnecessary SUID Bits: Conduct a strict audit of the filesystem and remove the SUID permission from administrative binaries that     do not require it for standard user execution.
 
+Thank you!
