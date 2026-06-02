@@ -2,7 +2,7 @@
 
 - Vulnerability Tittle : Unrestricted File Upload
 
-- OWASP Top 10 Risk : A04:2021-Insecure Design
+- OWASP Top 10 Risk : A04:2021 - Insecure Design
 
 - CWE ID : CWE-434 Unrestricted Upload of File with Dangerous Type
 
@@ -66,7 +66,7 @@ To mitigate the Unrestricted File Upload vulnerability and prevent Remote Code E
 
 Vulnerability Tittle : Privilege Escalation via Misconfigured SUID Binary (`systemctl`)
 
-OWASP Top 10 Risk : A01:2021-Broken Access Control
+OWASP Top 10 Risk : A04:2021 - Insecure Design
 
 CWE ID : CWE-269: Improper Privilege Management
 
