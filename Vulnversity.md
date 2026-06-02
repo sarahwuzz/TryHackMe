@@ -2,7 +2,7 @@
 
 - Vulnerability Tittle : Unrestricted File Upload
 
-- OWASP Top 10 Risk : A03:2021-Injection
+- OWASP Top 10 Risk : A04:2021-Insecure Design
 
 - CWE ID : CWE-434 Unrestricted Upload of File with Dangerous Type
 
