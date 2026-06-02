@@ -58,3 +58,49 @@ As shown in the evidence section below, running the whoami command confirms that
  -  Apply Input Sanitization and Parametrization: Use robust, built-in programming libraries to sanitize inputs before they reach the system. In environments where commands must be executed, arguments should be strictly separated from the command itself (parameterized) to ensure the system treats user input strictly as data, not as executable code.
 
  -  Enforce the Principle of Least Privilege: Run the web server process (e.g., Apache or Nginx) under a highly restricted, non-privileged service account such as a properly hardened www-data. Ensure this user has no access to powerful system binaries, cannot read sensitive configuration files, and is blocked from executing outbound network connections (like reverse shells) through firewall rules.
+
+# Vulnerability Assessment : Privilege Escalation via Sudo Misconfiguration
+
+- Vulnerability Tittle: Privilege Escalation via Sudo Misconfiguration `su`
+
+- OWASP Top 10 Risk : A04:2021 - Insecure Design
+
+- CWE ID : CWE-269: Improper Privilege Management
+
+- CVSS : CVSS:3.1/AV:L/AC:L/PR:L/UI:N/S:C/C:H/I:H/A:H – 8.8
+
+- Severity : High
+
+- `/bin/su`
+
+### Description
+
+During the post-exploitation enumeration phase, a local privilege escalation vulnerability was discovered due to a security misconfiguration in the Linux sudo privileges configuration. The `su` binary was found to be executable via sudo without requiring a password, allowing it to execute with the privileges of the superuser (which is `root`).
+
+Under standard security practices, administrative tools like `su` should never be allowed to run via sudo without password authentication for a low-privilege service account. An attacker with low-privilege access (such as `www-data`) can abuse this misconfiguration by executing the binary under the sudo context. When this command is executed via the misconfigured sudo rules, it immediately spawns a terminal with root privileges, leading to a complete system compromise.
+
+### Attack Configuration
+
+- Local Sudo Privilege Enumeration :
+
+  After gaining initial access as the www-data user, a local enumeration command was executed to identify misconfigured privileges and commands that can be run via sudo:
+
+  ```bash
+  find / -user root -perm -4000 -exec ls -ldb {} \; 2>/dev/null
+  ```
+
+- Following the binary checks, the `sudo -l` command was executed to evaluate the current users sudo permissions. The output revealed that the www-data user had the highest level of clearance, configured as `ALL NOPASSWD ALL`. This critical misconfiguration allowed the execution of any administrative command via sudo without password authentication, enabling the use of `sudo su` to instantly spawn a root shell.
+
+### Exploitation Evidence (Proof Of Concept)
+
+To verify that full administrative control had been achieved, standard identity check commands (`whoami` and `id`) were run, confirming a successful transition from `www-data` to `root`.
+
+<img width="598" height="333" alt="image" src="https://github.com/user-attachments/assets/6eb9672f-d066-47cd-a0ea-2bed4a499d8f" />
+
+*(this screecshot i took from my obsidian,cause the screecshot from shell is missing.)*  
+  
+### Remediation & Mitigation
+
+- Restrict Insecure Sudo Privileges: Conduct a strict audit of the sudoers configuration file and remove or restrict excessive permissions granted to low-privileged service accounts that do not require administrative access.
+
+Thank you!
