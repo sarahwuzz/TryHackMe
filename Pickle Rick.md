@@ -19,5 +19,10 @@ Instead of validating the input, the application directly passes the user's stri
 
 ### Attack Configuration
 
+- Target Web Discovery: Accessed the target web application and inspected the page source code, revealing a    hidden username comment `R1ckRul3s`.
 
+- Directory Fuzzing: Conducted web directory enumeration using FFUF *(or others tools you usually used)*       with .php and .txt extensions, successfully discovering login.php and robots.txt.
 
+- Credential Gathering: Analyzed robots.txt which contained a cleartext string used as the login password      for the administrative portal.
+
+- Authentication: Navigated to login.php and successfully authenticated using the discovered credentials,      granting access to the web command panel.
